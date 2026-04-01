@@ -1,0 +1,10 @@
+.gocache/
+.gopath/
+agent/__pycache__/
+agent/.venv/
+server/audit.log
+*.tmp
+server/internal/hub/hub.go.*
+struct.md
+README.md
+server/internal/server/server.go.*

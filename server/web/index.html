@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Remote Control Console</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <div id="loginView" class="view">
+    <form id="loginForm" class="login-card">
+      <h1 id="loginTitle">Remote Control</h1>
+      <p id="loginSubtitle">Sign in and choose an online device to start a session.</p>
+      <label>
+        <span id="labelUsername">Username</span>
+        <input id="username" value="viewer" required />
+      </label>
+      <label>
+        <span id="labelPassword">Password</span>
+        <input id="password" value="viewer123" type="password" required />
+      </label>
+      <button id="loginBtn" type="submit">Sign In</button>
+      <div id="loginError" class="error"></div>
+    </form>
+  </div>
+
+  <div id="appView" class="view hidden">
+    <header class="topbar">
+      <div>
+        <h2 id="appTitle">WebRTC Remote Desktop</h2>
+        <span id="statusText">Not connected</span>
+        <span id="transportText">Transport: unknown</span>
+      </div>
+      <div class="actions">
+        <select id="languageSelect" class="lang-select" aria-label="Language">
+          <option value="en">English</option>
+          <option value="zh">中文</option>
+        </select>
+        <button id="refreshBtn" type="button">Refresh Devices</button>
+        <button id="connectBtn" type="button">Connect</button>
+        <button id="disconnectBtn" type="button" class="danger">Disconnect</button>
+        <button id="mobileKeyboardBtn" type="button" class="mobile-only">Keyboard</button>
+        <button id="mobileDragToggleBtn" type="button" class="mobile-only">Drag: Off</button>
+      </div>
+    </header>
+
+    <div class="layout">
+      <aside class="sidebar">
+        <section>
+          <h3 id="sectionDevices">Online Devices</h3>
+          <div id="deviceList" class="device-list"></div>
+        </section>
+
+        <section>
+          <h3 id="sectionSession">Session Options</h3>
+          <label>
+            <span id="labelDisplay">Display</span>
+            <select id="displaySelect"></select>
+          </label>
+          <label>
+            <span id="labelQuality">Quality</span>
+            <select id="qualitySelect">
+              <option id="qualityLow" value="low">Low</option>
+              <option id="qualityMedium" value="medium" selected>Medium</option>
+              <option id="qualityHigh" value="high">High</option>
+              <option id="qualityUltra" value="ultra">Ultra</option>
+            </select>
+          </label>
+          <label>
+            <span id="labelFps">FPS</span>
+            <input id="fpsInput" type="range" min="5" max="60" value="30" />
+            <span id="fpsValue">30</span>
+          </label>
+        </section>
+      </aside>
+
+      <main id="stage" class="stage" tabindex="0">
+        <video id="remoteVideo" autoplay playsinline></video>
+        <div id="placeholder" class="placeholder">
+          <p id="placeholderTitle">No active session</p>
+          <small id="placeholderHint">This area shows placeholder content until a device stream is connected.</small>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <textarea
+    id="mobileImeInput"
+    class="ime-input"
+    autocomplete="off"
+    autocorrect="off"
+    autocapitalize="off"
+    spellcheck="false"
+    aria-label="mobile keyboard bridge"
+  ></textarea>
+
+  <script src="./app.js"></script>
+</body>
+</html>
